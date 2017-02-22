@@ -9,8 +9,9 @@ var updateCart = function () {
 
 
 var addItem = function (item) {
-  // TODO: Write this function. Remember this function has nothing to do with display. 
+  // TODO: Write this function. Remember this function has nothing to do with display.
   // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
+  cart.push(item);
 }
 
 var clearCart = function () {
@@ -19,10 +20,12 @@ var clearCart = function () {
 
 $('.view-cart').on('click', function () {
   // TODO: hide/show the shopping cart!
+  $('.shopping-cart').toggleClass('show');
 });
 
 $('.add-to-cart').on('click', function () {
   // TODO: get the "item" object from the page
+  var item = $('.add-to-cart').closest('.item').data();
   addItem(item);
   updateCart();
 });

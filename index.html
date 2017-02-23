@@ -151,7 +151,7 @@
     </div>
   </div>
   <script id="cart-template" type="text/x-handlebars-template">
-    <p>{{ item }} - ${{ price }}</p>
+    <p>{{ item }} ({{ tally }}) - ${{ totalPrice }}<span class="remove glyphicon glyphicon-trash" aria-hidden="true"></span></p>
   </script>
   <!-- <script id="total-template" type="text/x-handlebars-template">
     <p>Total: $<span class="total">{{ total }}</span></p>

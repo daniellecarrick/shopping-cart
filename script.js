@@ -3,9 +3,6 @@ var cart = [];
 var source = $('#cart-template').html();
 var template = Handlebars.compile(source);
 
-/*var sourceTotal = $('#total-template').html();
-var templateTotal = Handlebars.compile(sourceTotal);*/
-
 var updateCart = function () {
   // TODO: Write this function. In this function we render the page.
   // Meaning we make sure that all our cart items are displayed in the browser.
@@ -33,6 +30,8 @@ var clearCart = function () {
   // TODO: Write a function that clears the cart ;-)
   $('.cart-list').empty();
   cart = [];
+  cartTotal = 0;
+  updateCart();
 }
 
 $('.view-cart').on('click', function () {

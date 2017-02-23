@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="node_modules/handlebars/dist/handlebars.min.js"></script>
+
   <title>Shopping Cart!</title>
 </head>
 <body>
@@ -100,7 +101,7 @@
 
 
     </div>
-    <div class="row">
+    <div class="row last">
       <div class="col-md-4">
         <div class="card-container">
           <div class="card item" item data-name="book" data-price="25">
@@ -150,12 +151,45 @@
       </div>
     </div>
   </div>
+  <hr>
+  <form>
+      Item Name:
+      <input class="item-name" type="text" placeholder="something">
+      <br>
+      Price:
+      <input type="number" class="item-price" placeholder="$$$$">
+      <br>
+      Image url:
+      <input type="text" class="item-url" placeholder="www.google.com/image.gif">
+      <br>
+      <p>Click the submit button</p>
+      <button type="button" class="submit-button">Submit</button>
+  </form>
+
   <script id="cart-template" type="text/x-handlebars-template">
-    <p>{{ item }} - ${{ price }}</p>
+    <p>{{ item }} ({{tally}}) - ${{ totalPrice }}<span class="glyphicon glyphicon-trash remove" aria-hidden="true"></span></p>
   </script>
-  <!-- <script id="total-template" type="text/x-handlebars-template">
-    <p>Total: $<span class="total">{{ total }}</span></p>
-  </script> -->
-  <script type="text/javascript" src="script.js"></script>
+
+  <script id="add-item-template" type="text/x-handlebars-template">
+    <div class="col-md-4">
+        <div class="card-container">
+          <div class="card item" item data-name="{{name}}" data-price="{{price}}">
+            <div class="pricebox">
+              <p class="price"> ${{price}} </p>
+            </div>
+            <div class="buybox">
+              <p class="add-to-cart"> ADD TO CART </p>
+            </div>
+            <div class="card-inner">
+              <img src="{{url}}" class="proimage" alt="invalid url">
+            </div>
+          </div>
+        </div>
+      </div>
+  </script>
+
+<script type="text/javascript" src="addItem.js"></script>
+<script type="text/javascript" src="script.js"></script>
+  
 </body>
 </html>

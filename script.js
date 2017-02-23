@@ -10,7 +10,7 @@ var updateCart = function () {
   $('.cart-list').empty();
   var cartTotal = 0;
   for (i = 0; i < cart.length; i++) {
-    var newHTML = template({ item: cart[i].name, price: cart[i].price });
+    var newHTML = template({ item: cart[i].name, price: cart[i].price, tally: cart[i].tally });
     console.log(cart[i]);
     cartTotal += cart[i].price;
     $('.cart-list').append(newHTML);
@@ -23,7 +23,24 @@ var updateCart = function () {
 var addItem = function (item) {
   // TODO: Write this function. Remember this function has nothing to do with display.
   // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
-  cart.push(item);
+  if (cart.length === 0) {
+    cart.push(item);
+    cart[i].tally = 0;
+    cart[i].totalPrice = item.price;
+  } else {
+  for (i = 0; i < cart.length; i++) {
+    if (cart[i].name === item.name) {
+      //var tally = cart[i].tally;
+      console.log("it exists");
+      cart[i].tally++;
+      cart[i].totalPrice = cart[i].tally * item.price;
+      }
+    }
+  }
+}
+
+var removeItem = function() {
+  console.log("remove was clicked");
 }
 
 var clearCart = function () {
@@ -49,6 +66,10 @@ $('.add-to-cart').on('click', function () {
 $('.clear-cart').on('click', function () {
   clearCart();
 });
+
+$('.shopping-cart').on('click', '.remove', function() {
+  removeItem();
+})
 
 // update the cart as soon as the page loads!
 updateCart();

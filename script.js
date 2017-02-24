@@ -10,9 +10,9 @@ var updateCart = function () {
   $('.cart-list').empty();
   var cartTotal = 0;
   for (i = 0; i < cart.length; i++) {
-    var newHTML = template({ item: cart[i].name, price: cart[i].price, tally: cart[i].tally });
-    console.log(cart[i]);
-    cartTotal += cart[i].price;
+    var newHTML = template({ item: cart[i].name, price: cart[i].price, tally: cart[i].tally, totalPrice: cart[i].totalPrice });
+    //console.log(cart[i]);
+    cartTotal += cart[i].totalPrice;
     $('.cart-list').append(newHTML);
   }
   $('.total').empty();
@@ -23,24 +23,32 @@ var updateCart = function () {
 var addItem = function (item) {
   // TODO: Write this function. Remember this function has nothing to do with display.
   // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
-  if (cart.length === 0) {
-    cart.push(item);
-    cart[i].tally = 0;
-    cart[i].totalPrice = item.price;
-  } else {
+
+  var itemExists = false;
+
   for (i = 0; i < cart.length; i++) {
     if (cart[i].name === item.name) {
-      //var tally = cart[i].tally;
-      console.log("it exists");
-      cart[i].tally++;
-      cart[i].totalPrice = cart[i].tally * item.price;
-      }
+      cart[i].tally += 1;
+      cart[i].totalPrice = cart[i].price * cart[i].tally;
+      itemExists = true;
     }
   }
+    if (!itemExists) {
+      cart.push(item);
+      cart[cart.length-1].tally = 1;
+      cart[cart.length-1].totalPrice = cart[cart.length-1].price;
+    }
 }
 
-var removeItem = function() {
+var removeItem = function(clicked) {
   console.log("remove was clicked");
+  itemName = clicked.closest('p').attr("class");
+  for (i = 0; i < cart.length; i++) {
+    if(cart[i].name === itemName) {
+      console.log("it matches" + itemName);
+      cart[i].tally -= 1;
+    }
+  }
 }
 
 var clearCart = function () {
@@ -56,9 +64,10 @@ $('.view-cart').on('click', function () {
   $('.shopping-cart').toggleClass('show');
 });
 
-$('.add-to-cart').on('click', function () {
+$('.row').on('click', '.add-to-cart', function () {
   // TODO: get the "item" object from the page
   var item = $(this).closest('.item').data();
+  //console.log(item);
   addItem(item);
   updateCart();
 });
@@ -68,7 +77,9 @@ $('.clear-cart').on('click', function () {
 });
 
 $('.shopping-cart').on('click', '.remove', function() {
-  removeItem();
+  var clicked = $(this);
+  removeItem(clicked);
+  updateCart();
 })
 
 // update the cart as soon as the page loads!

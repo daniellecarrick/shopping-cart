@@ -98,9 +98,8 @@
           </div>
         </div>
       </div>
-
-
     </div>
+
     <div class="row last">
       <div class="col-md-4">
         <div class="card-container">
@@ -152,24 +151,30 @@
     </div>
   </div>
   <hr>
-  <form>
-    <div class="form-group">
-      Item Name:
-      <input class="item-name form-control" type="text" placeholder="something">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Add an item</h1>
+        <form>
+          <div class="form-group">
+            <label for="item-name">Item Name:</label>
+            <input class="item-name form-control" id="item-name" type="text" placeholder="Item name">
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="item-price form-control" id="price" placeholder="$$$$">
+          </div>
+          <div class="form-group">
+            <label for="img-url">Image url:</label>
+            <input type="text" class="item-url form-control" id="img-url" placeholder="ex: www.google.com/image.gif">
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary submit-button">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="form-group">
-      Price:
-      <input type="number" class="item-price form-control" placeholder="$$$$">
-    </div>
-    <div class="form-group">
-      Image url:
-      <input type="text" class="item-url form-control" placeholder="www.google.com/image.gif">
-    </div>
-    <div class="form-group">
-      <p>Click the submit button</p>
-      <button type="button" class="submit-button">Submit</button>
-    </div>
-  </form>
+  </div>
 
   <script id="cart-template" type="text/x-handlebars-template">
     <p class="{{ item }}">{{ item }} ({{tally}}) - ${{ totalPrice }}<span class="glyphicon glyphicon-trash remove" aria-hidden="true"></span></p>
